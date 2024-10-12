@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogging Website</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Blogging Website</h1>
+
+        <!-- Blog Submission Form -->
+        <section id="write-blog">
+            <h2>Write a Blog</h2>
+            <form id="blogForm">
+                <input type="text" id="author" placeholder="Enter Your Name" required>
+                <textarea id="content" placeholder="Write your blog here..." required></textarea>
+                <button type="submit">Submit Blog</button>
+            </form>
+        </section>
+
+        <!-- Display Blogs -->
+        <section id="blog-list">
+            <h2>All Blogs</h2>
+            <div id="blogs"></div>
+        </section>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
