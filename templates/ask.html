@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ask a Question</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css" />
+    <link rel="stylesheet" href="../static/style.css"> <!-- Link to your CSS file -->
+</head>
+
+<body>
+    <!-- <div id="loader">
+        <div id="yellow1"></div>
+        <div id="yellow2"></div>
+        <video autoplay loop muted src="./assets/video.mp4"></video>
+        <h1>
+            ASK ABOUT THE ATHLETE'S VOICE<br /><em>GET YOUR QUESTIONS</em> ANSWERED!
+        </h1>
+    </div> -->
+    
+    <div id="nav">
+        <h1>ACTIVITY</h1>
+        <div id="nav-right">
+            <a href="./">HOME</a>
+            <a href="./blog">BLOGS</a>
+            <a href="./explore">EXPLORE</a>
+            <a href="./atheletes">ATHELETE INFO</a>
+            <a href="./ask">ASK</a> <!-- Link to the ask page -->
+            <button>SIGN IN</button>
+        </div>
+    </div>
+
+    <div id="main3">
+            <div id="container3">
+                <h1>Ask a Question</h1>
+                <form id="questionForm">
+                    <div id="row11">
+                        <h3>AUTH:</h3>
+                        <input type="text" id="author"  required />
+                    </div>
+                    <div id="row22">
+                        <h3>TITLE:</h3>
+                        <input type="text" id="title"  required /> <!-- New input for blog title -->
+                    </div>
+                    <textarea id="question" placeholder="Your Question" required></textarea>
+                    <button type="submit">Submit</button>
+                </form>
+                <div id="chat"></div> <!-- Chat container for displaying messages -->
+            </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+        integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        // Handle form submission
+        document.getElementById('questionForm').onsubmit = async function (event) {
+            event.preventDefault(); // Prevent the default form submission
+            // const chatdiv = document.getElementById('chat');
+            // chatdiv.style.backgroundColor = 'white';
+            const author = document.getElementById('author').value.trim();
+            const title = document.getElementById('title').value.trim(); // Get title value
+            const question = document.getElementById('question').value.trim();
+
+            if (author && title && question) {
+                // Add user message to chat
+                const userMessage = document.createElement('div');
+                userMessage.className = 'message user-message';
+                userMessage.textContent = `${author} (Title: ${title}): ${question}`;
+                document.getElementById('chat').appendChild(userMessage);
+
+                // Send data to the Flask server
+                const response = await fetch('/ask_blog', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ author, title, question }), // Include title in request
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    // Add bot response to chat
+                    const botMessage = document.createElement('div');
+                    botMessage.className = 'message bot-message';
+                    botMessage.innerHTML = `<strong>Bot:</strong> ${data.answer}`;
+                    document.getElementById('chat').appendChild(botMessage);
+                } else {
+                    const errorMessage = document.createElement('div');
+                    errorMessage.className = 'message bot-message';
+                    errorMessage.innerHTML = 'Bot: Failed to get an answer.';
+                    document.getElementById('chat').appendChild(errorMessage);
+                }
+
+                // Clear input fields
+                document.getElementById('question').value = '';
+                document.getElementById('title').value = ''; // Clear title field
+            } else {
+                alert('Please fill in all fields.');
+            }
+        };
+
+        function loading() {
+            var t1 = gsap.timeline();
+
+            t1.to("#yellow1", {
+                top: "-100%",
+                delay: 0.5,
+                duration: 0.7,
+                ease: "expo.out",
+            });
+
+            t1.from(
+                "#yellow2",
+                {
+                    top: "100%",
+                    delay: 0.6,
+                    duration: 0.7,
+                    ease: "expo.out",
+                },
+                "anim"
+            );
+
+            t1.to(
+                "#loader h1",
+                {
+                    delay: 0.6,
+                    duration: 0.7,
+                    color: "black",
+                },
+                "anim"
+            );
+
+            t1.to("#loader", {
+                opacity: 0,
+            });
+
+            t1.to("#loader", {
+                display: "none",
+            });
+        }
+
+        loading();
+    </script>
+</body>
+
+</html>

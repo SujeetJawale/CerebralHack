@@ -1,4 +1,62 @@
-<section id="blog-list">
-    <h2>All Blogs</h2>
-    <div id="blogs"></div>
-</section>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Blogs</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+
+<body>
+    <div id="nav">
+        <h1>ACTIVITY</h1>
+        <div id="nav-right">
+            <a href="./">HOME</a>
+            <a href="./blog">BLOGS</a>
+            <a href="./explore">EXPLORE</a>
+            <a href="./atheletes">ATHELETE INFO</a>
+            <a href="./ask">ASK</a> <!-- Link to the ask page -->
+            <button>SIGN IN</button>
+        </div>
+    </div>
+
+    <div id="main3">
+        <div class="container">
+            <h1>EXPLORE BLOGS</h1>
+            <div id="blogs">
+                {% if blogs %}
+                <ul>
+                    {% for author, author_blogs in blogs.items() %}
+                    <li><strong>{{ author }}</strong></li>
+                    <ul>
+                        {% for blog in author_blogs %}
+                        <li class="blog">
+                            <h3 class="blog-title">{{ blog[0] }}</h3> <!-- Blog Title -->
+                            <p class="blog-content" style="display:none;">{{ blog[1] }}</p>
+                            <!-- Blog Content, hidden by default -->
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p>No blogs to explore yet. Start writing some!</p>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.querySelectorAll('.blog-title').forEach(title => {
+            title.addEventListener('click', function () {
+                // Toggle the display of the associated blog content
+                const content = this.nextElementSibling;
+                content.style.display = content.style.display === 'none' ? 'block' : 'none';
+            });
+        });
+    </script>
+</body>
+
+</html>

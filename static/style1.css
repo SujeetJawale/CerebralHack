@@ -110,7 +110,7 @@ body {
 
 #nav-right a {
     padding: 5px 5px;
-    margin-right: 3vw;
+    margin-right: 4vw;
     text-decoration: none;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: #000;
@@ -200,7 +200,7 @@ body {
 /* ------------------------------------------------------------------------------------------------- */
 
 #main2 {
-    background-color: rgb(168, 167, 158);
+    background-color: #f5e41b;
     height: 105vh;
     width: 100vw;
     display: flex;
@@ -208,24 +208,25 @@ body {
     justify-content: center;
     flex-direction: column;
     color: white;
-    z-index: 12;
+    z-index: 2;
 }
 
 .container {
     width: 1000px;
-    height: 700px;
+    height: 680px;
     background-color: black;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.6);
-    margin-top: 40px;
+    margin-top: 60px;
+    position: relative;
 }
 
 #main2 h1,
 h2 {
     text-align: center;
     text-transform: capitalize;
-    margin: 2px 20px 20px 20px;
+    margin: 20px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 4vh;
     letter-spacing: 2px;
@@ -247,7 +248,7 @@ h2 {
     font-weight: 500;
     font-size: 2.2vh;
     text-transform: capitalize;
-    color: #e5df9f;
+    color: #f5e41b;
 }
 
 #row1 {
@@ -267,7 +268,6 @@ form {
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    background-color: #e5df9f;
 }
 
 #author,
@@ -280,29 +280,16 @@ form {
     border: 1px solid #ddd;
     border-radius: 4px;
     margin-right: 20px;
-    background-color: #e5df9f;
-
 }
 
 textarea {
-    width: 61vw;
+    width: 60vw;
     height: 46vh;
     margin-left: 20px;
     margin-bottom: 10px;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    background-color: #e5df9f;
-
-}
-
-#content {
-    font-size: 2vh;
-}
-
-#content::placeholder {
-    font-size: 2vh;
-    text-transform: uppercase;
 }
 
 #main2 button {
@@ -314,7 +301,7 @@ textarea {
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    margin-left: 360px;
+    margin-left: 380px;
     margin-right: 20px;
     margin-bottom: 20px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -322,239 +309,18 @@ textarea {
 }
 
 #main2 button:hover {
-    background-color: #e5df9f;
+    background-color: #847a10;
 }
 
 #blogs {
-    margin-left: 40px;
     margin-top: 20px;
-}
-
-#blogs li strong {
-    font-size: 2vh;
-    text-transform: uppercase;
-    font-weight: 500;
 }
 
 .blog {
-    margin-top: 5px;
     margin-bottom: 20px;
     padding: 10px;
     background-color: black;
     border: 1px solid #ddd;
-    list-style: none;
-    background-color: #e5df9f;
-    color: black;
-    font-size: 2vh;
-}
-
-.blog-content {
-    margin-top: 5px;
 }
 
 /* ----------------------------------------------------------------------------------------- */
-#main3 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    height: 100vh;
-    width: 100vw;
-    background-color: rgb(168, 167, 158);
-    ;
-}
-
-#row11 {
-    display: flex;
-
-}
-
-#row22 {
-    display: flex;
-
-}
-
-#row11 h3 {
-    padding: 5px 0px 0px 20px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-weight: 500;
-    font-size: 2.2vh;
-    text-transform: capitalize;
-    color: #f5e41b;
-}
-
-#row22 h3 {
-    padding: 5px 0px 0px 20px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-weight: 500;
-    font-size: 2.2vh;
-    text-transform: capitalize;
-    color: #f5e41b;
-}
-
-#chat {
-    height: 30vh;
-    overflow-y: auto;
-    padding: 10px;
-    background-color: black;
-    margin-top: 20px;
-}
-
-.message {
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-.user-message {
-    background-color: #96ea6c;
-    align-self: flex-end;
-    text-align: right;
-    color: black;
-}
-
-.bot-message {
-    background-color: #e7f76c;
-    align-self: flex-start;
-    text-align: left;
-    color: black;
-}
-
-#container3 {
-    display: flex;
-    flex-direction: column;
-    background-color: black;
-    width: 1000px;
-    height: 700px;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.6);
-    margin-top: 60px;
-    color: white;
-}
-
-#container3 h1 {
-    text-align: center;
-    text-transform: capitalize;
-    margin: 20px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 4vh;
-    letter-spacing: 2px;
-    border: 1px solid #f5e41b;
-    border-radius: 10px;
-    padding: 20px;
-    background-color: #f5e41b;
-    color: black;
-}
-
-#row11 input {
-    width: 60vw;
-}
-
-#questionForm textarea {
-    width: 61vw;
-    height: 15vh;
-    margin-left: 20px;
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-#questionForm button {
-    width: 14vw;
-    font-size: 3vh;
-    padding: 10px;
-    background-color: #f5e41b;
-    color: Black;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    margin-left: 360px;
-    margin-right: 20px;
-    margin-bottom: 20px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    text-transform: uppercase;
-}
-
-#main3 {
-    background-color: rgb(168, 167, 158);
-    height: 105vh;
-    width: 100vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    color: white;
-    z-index: 12;
-}
-
-.container h1 {
-    text-align: center;
-    text-transform: capitalize;
-    margin: 20px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 4vh;
-    letter-spacing: 2px;
-    border: 1px solid #f5e41b;
-    border-radius: 10px;
-    padding: 20px;
-    background-color: #f5e41b;
-    color: black;
-}
-
-/* ------------------------------------------- */
-
-#athletes-section {
-    height: 100vh;
-    width: 100vw;
-    background-color: rgb(168, 167, 158);
-    padding-top: 13vh;
-    display: flex;
-    align-items: top;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
-}
-
-.athlete-card {
-    width: 300px;
-    height: 350px;
-    background-color: black;
-    color: white;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.6);
-    position: relative;
-    background-size: cover;
-    background-position: center;
-}
-
-
-.athlete-details {
-    text-align: center;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.7);
-}
-
-.athlete-details h2 {
-    font-size: 2.5vh;
-    margin-bottom: 8px;
-}
-
-.athlete-details p {
-    font-size: 2vh;
-    margin-bottom: 5px;
-}
-
-.achievements {
-    background-color: #f5e41b;
-    padding: 10px;
-    color: black;
-    font-size: 1.8vh;
-    font-weight: bold;
-    text-align: center;
-    align-items: center;
-}
