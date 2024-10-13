@@ -33,6 +33,30 @@ def index():
 @app.route('/atheletes')
 def atheletes():
     return render_template('atheletes.html')
+@app.route('/ask_athlete', methods=['POST'])
+def ask_athlete():
+    data = request.json
+    question = data.get('question')
+
+    if question:
+        # Create a prompt for general athlete questions
+        prompt = f"The user is asking a question about athletes: {question}"
+
+        # Call the OpenAI API
+        response = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant that answers questions about athletes."},
+                {"role": "user", "content": prompt}
+            ]
+        )
+
+        # Extract the answer from the response
+        answer = response.choices[0].message.content
+        return jsonify({"answer": answer}), 200
+    else:
+        return jsonify({"error": "Question is required!"}), 400
+
 
 # Route to serve the ChatGPT page
 @app.route('/ask', methods=['GET'])

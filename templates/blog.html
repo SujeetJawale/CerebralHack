@@ -14,11 +14,12 @@
         <h1>ACTIVITY</h1>
         <div id="nav-right">
             <a href="./">HOME</a>
-            <a href="./blog">BLOGS</a>
             <a href="./explore">EXPLORE</a>
             <a href="./atheletes">ATHELETE INFO</a>
-            <a href="./ask">ASK</a> <!-- Link to the ask page -->
-            <button>SIGN IN</button>
+            <a href="./ask">ASK</a>
+            <a href="./blog" id="blogLink" style="display:none;">BLOGS</a>
+            <button id="signInBtn">SIGN IN</button>
+            <button id="logOutBtn" style="display:none;">LOG OUT</button> <!-- Initially hidden -->
         </div>
     </div>
     <div id="main2">
@@ -84,6 +85,87 @@
                 alert('Please fill in all fields.');
             }
         };
+    </script>
+    <div id="signInModal" class="modal">
+        <div class="modal-content">
+            <h2>Sign In</h2>
+            <form id="signInForm">
+                <input type="text" id="username" placeholder="Username" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button type="submit">Sign In</button>
+            </form>
+            <span class="close">&times;</span>
+        </div>
+    </div>
+
+
+    <script>
+        const validCredentials = {
+            username: "user123",
+            password: "pass123"
+        };
+
+        var modal = document.getElementById("signInModal");
+        var signInBtn = document.getElementById("signInBtn");
+        var logOutBtn = document.getElementById("logOutBtn");
+        var span = document.getElementsByClassName("close")[0];
+        var blogLink = document.getElementById("blogLink");
+
+        // Check login state on page load
+        window.onload = function () {
+            if (localStorage.getItem('loggedIn') === 'true') {
+                showLoggedInState();
+            }
+        };
+
+        signInBtn.onclick = function () {
+            modal.style.display = "block";
+        }
+
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        document.getElementById('signInForm').onsubmit = function (event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            if (username === validCredentials.username && password === validCredentials.password) {
+                alert('Access granted!');
+                localStorage.setItem('loggedIn', 'true'); // Set login state
+                showLoggedInState();
+                modal.style.display = 'none';
+            } else {
+                alert('Invalid credentials!');
+                blogLink.style.display = 'none'; // Hide blog link
+            }
+        }
+
+        logOutBtn.onclick = function () {
+            alert('Logged out successfully!');
+            localStorage.setItem('loggedIn', 'false'); // Clear login state
+            showLoggedOutState();
+        }
+
+        function showLoggedInState() {
+            blogLink.style.display = 'inline'; // Show blog link
+            signInBtn.style.display = 'none'; // Hide sign-in button
+            logOutBtn.style.display = 'inline'; // Show log-out button
+        }
+
+        function showLoggedOutState() {
+            blogLink.style.display = 'none'; // Hide blog link
+            signInBtn.style.display = 'inline'; // Show sign-in button
+            logOutBtn.style.display = 'none'; // Hide log-out button
+        }
     </script>
 </body>
 

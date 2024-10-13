@@ -6,6 +6,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LA Olympic Athletes</title>
     <link rel="stylesheet" href="../static/style.css">
+    <style>
+        #chat-section {
+            padding: 15px;
+            background-color: rgb(168, 167, 158);
+            border-radius: 10px;
+            max-width: 10000px;
+        }
+
+        #chat-history {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .chat-entry {
+            margin-bottom: 10px;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .user-entry {
+            background-color: #96ea6c;
+            /* Light green for user questions */
+            text-align: right;
+        }
+
+        .bot-response {
+            background-color: #e7f76c;
+            /* Light red for bot responses */
+            text-align: left;
+        }
+
+        #question {
+            width: 90%;
+            margin-left: 70px;
+            margin-bottom: 15px;
+            height: 15vh;
+            justify-content: center;
+        }
+
+        #askBtn {
+            padding: 10px 20px;
+            background-color: yellow;
+            color: black;
+            margin-right: 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
 </head>
 
 <body>
@@ -13,11 +69,12 @@
         <h1>ACTIVITY</h1>
         <div id="nav-right">
             <a href="./">HOME</a>
-            <a href="./blog">BLOGS</a>
             <a href="./explore">EXPLORE</a>
             <a href="./atheletes">ATHELETE INFO</a>
-            <a href="./ask">ASK</a> <!-- Link to the ask page -->
-            <button>SIGN IN</button>
+            <a href="./ask">ASK</a>
+            <a href="./blog" id="blogLink" style="display:none;">BLOGS</a>
+            <button id="signInBtn">SIGN IN</button>
+            <button id="logOutBtn" style="display:none;">LOG OUT</button> <!-- Initially hidden -->
         </div>
     </div>
 
@@ -62,6 +119,141 @@
             </div>
         </div>
     </section>
+
+    <!-- Chat bot section starts here -->
+    <section id="chat-section">
+        <h2>Ask About Athletes</h2>
+        <div id="chat-history" style="background-color: rgb(168, 167, 158);margin-right: 80px;margin-left: 70px;"></div>
+        <!-- Chat history area -->
+        <textarea id="question" placeholder="Ask a question about athletes..." rows="4"></textarea>
+        <button id="askBtn">Ask</button>
+    </section>
+    <!-- Chat bot section ends here -->
+
+    <script>
+        const askBtn = document.getElementById('askBtn');
+        const chatResponse = document.getElementById('chat-history');
+
+        askBtn.onclick = function () {
+            const question = document.getElementById('question').value.trim();
+
+            if (question) {
+                // Display the user's question
+                const userEntry = document.createElement('div');
+                userEntry.className = 'chat-entry user-entry';
+                userEntry.textContent = question;
+                chatResponse.appendChild(userEntry);
+
+                fetch('/ask_athlete', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ question: question }),
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        const botResponse = document.createElement('div');
+                        botResponse.className = 'chat-entry bot-response';
+                        botResponse.textContent = data.answer || "Error: " + data.error;
+                        chatResponse.appendChild(botResponse);
+
+                        // Clear the input after asking
+                        document.getElementById('question').value = '';
+
+                        // Scroll to the bottom of the chat
+                        chatResponse.scrollTop = chatResponse.scrollHeight;
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            } else {
+                alert("Please enter a question!");
+            }
+        };
+    </script>
+
+    <!-- Modal and Sign-In functionality -->
+    <div id="signInModal" class="modal">
+        <div class="modal-content">
+            <h2>Sign In</h2>
+            <form id="signInForm">
+                <input type="text" id="username" placeholder="Username" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button type="submit">Sign In</button>
+            </form>
+            <span class="close">&times;</span>
+        </div>
+    </div>
+
+    <script>
+        const validCredentials = {
+            username: "user123",
+            password: "pass123"
+        };
+
+        var modal = document.getElementById("signInModal");
+        var signInBtn = document.getElementById("signInBtn");
+        var logOutBtn = document.getElementById("logOutBtn");
+        var span = document.getElementsByClassName("close")[0];
+        var blogLink = document.getElementById("blogLink");
+
+        // Check login state on page load
+        window.onload = function () {
+            if (localStorage.getItem('loggedIn') === 'true') {
+                showLoggedInState();
+            }
+        };
+
+        signInBtn.onclick = function () {
+            modal.style.display = "block";
+        }
+
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        document.getElementById('signInForm').onsubmit = function (event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            if (username === validCredentials.username && password === validCredentials.password) {
+                alert('Access granted!');
+                localStorage.setItem('loggedIn', 'true'); // Set login state
+                showLoggedInState();
+                modal.style.display = 'none';
+            } else {
+                alert('Invalid credentials!');
+                blogLink.style.display = 'none'; // Hide blog link
+            }
+        }
+
+        logOutBtn.onclick = function () {
+            alert('Logged out successfully!');
+            localStorage.setItem('loggedIn', 'false'); // Clear login state
+            showLoggedOutState();
+        };
+
+        function showLoggedInState() {
+            signInBtn.style.display = 'none';
+            logOutBtn.style.display = 'block';
+            blogLink.style.display = 'block'; // Show blog link
+        }
+
+        function showLoggedOutState() {
+            signInBtn.style.display = 'block';
+            logOutBtn.style.display = 'none';
+            blogLink.style.display = 'none'; // Hide blog link
+        }
+    </script>
 </body>
 
 </html>
