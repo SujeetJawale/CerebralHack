@@ -1,3 +1,5 @@
+<img src="https://github.com/user-attachments/assets/e5fc1d3a-5462-412c-b4bd-3929eb33d4f4" alt="Image" height="300" width="100%"/>
+
 # AthleteVerse
 
 **Overview**  
