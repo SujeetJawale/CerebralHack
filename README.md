@@ -1,4 +1,5 @@
-<img src="https://github.com/user-attachments/assets/e5fc1d3a-5462-412c-b4bd-3929eb33d4f4" alt="Image" height="300" width="100%"/>
+![athlele-min](https://github.com/user-attachments/assets/18564f20-f048-41fe-b981-8ffb82dcd114)
+
 
 # AthleteVerse
 - [Watch the video](https://www.youtube.com/watch?v=S5gFs5KClvI)
