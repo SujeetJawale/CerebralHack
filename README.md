@@ -1,7 +1,8 @@
 <img src="https://github.com/user-attachments/assets/e5fc1d3a-5462-412c-b4bd-3929eb33d4f4" alt="Image" height="300" width="100%"/>
 
 # AthleteVerse
-
+- [Watch the video](https://www.youtube.com/watch?v=S5gFs5KClvI)
+---
 **Overview**  
 AthleteVerse is a platform that highlights athlete profiles, allowing them to write and share blogs about their personal experiences. Fans can immerse themselves in these stories and interact through an AI-powered Q&A system, which delivers insightful responses to their questions. The platform also features secure user authentication, granting access to exclusive content from athletes.
 
@@ -24,7 +25,7 @@ AthleteVerse is a platform that highlights athlete profiles, allowing them to wr
 ## Development Experience
 AthleteVerse was an exciting opportunity to apply cutting-edge AI technology, combining it with a clean, responsive user experience. The project seamlessly blends sports storytelling with modern tech innovation.
 
-[Watch the video](https://www.youtube.com/watch?v=S5gFs5KClvI)
+
 
 ### **Main Page**
 This is the opening page of the app. It serves as the central hub, welcoming users and offering quick access to the platform's main features. Users can explore blogs, learn about athletes, and access interactive sections from here.
