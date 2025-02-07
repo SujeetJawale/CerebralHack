@@ -3,7 +3,7 @@
 
 # AthleteVerse
 
-- [Live Link](https://cbdep.onrender.com/)
+- [Live Link](https://cbdep.onrender.com/) (1-2 mins to load)
 - [Watch the video](https://www.youtube.com/watch?v=S5gFs5KClvI)
 ---
 **Overview**  
