@@ -2,7 +2,7 @@
 
 
 # AthleteVerse
-
+### Hackathon - [Cerebral Hack 2024](https://hack.cerebralbeach.com/)
 - [Live Link](https://verath.vercel.app/)
 - [Watch the video](https://www.youtube.com/watch?v=S5gFs5KClvI)
 ---
